@@ -1,4 +1,4 @@
-const bcrypt = require('bcryptjs')
+const bcrypt = require('bcrypt')
 const usersRouter = require('express').Router()
 const User = require('../mongo/models/User')
 
