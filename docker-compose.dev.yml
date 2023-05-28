@@ -6,19 +6,37 @@ services:
       dockerfile: dev.Dockerfile # This will simply tell which dockerfile to read
     volumes:
       - ./blogs-front/:/usr/src/app
+    ports:
+      - 3000:3000
     environment:
-      - REACT_APP_BACKEND_URL=http://localhost:9001/api
+      - REACT_APP_BACKEND_URL=http://server:9001
       - DANGEROUSLY_DISABLE_HOST_CHECK=true # Fixes the Invalid host header problem, use only in dev
     container_name: blogs-front-dev # This will name the container
   debug-helper:
     image: busybox
 
-  nginx:
-    image: nginx:1.20.1
-    volumes:
-      - ./nginx.dev.conf:/etc/nginx/nginx.conf:ro
+  mongo:
+    image: mongo
     ports:
-      - 8080:80
-    container_name: reverse-proxy
+      - 3456:27017
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: example
+      MONGO_INITDB_DATABASE: blog_db
+    volumes:
+      - ./blogs-back/mongo/mongo-init.js:/docker-entrypoint-initdb.d/mongo-init.js
+      - ./blogs-back/mongo_data:/data/db
+
+  server:
+    image: blogs-back-dev
+    volumes:
+      - ./blogs-back/:/usr/src/app # The path can be relative, so ./ is enough to say "the same location as the docker-compose.yml"
+    ports:
+      - 9001:9001
+    environment:
+      - MONGODB_URI=mongodb://the_username:the_password@mongo:27017/blog_db
     depends_on:
-      - app # wait for the frontend container to be started
+      - mongo
+
+volumes:
+  mongo_data:

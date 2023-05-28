@@ -19,7 +19,7 @@ services:
     ports:
       - 9001:9001
     #environment:
-    #  - MONGO_URL=mongodb://the_username:the_password@mongo:27017/blog_db # This comes from .env
+    #  - MONGODB_URI=mongodb://the_username:the_password@mongo:27017/blog_db # This comes from .env
     depends_on:
       - mongo
 

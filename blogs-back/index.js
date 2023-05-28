@@ -10,7 +10,6 @@ const config = require('./utils/config')
 const usersRouter = require('./controllers/users')
 const loginRouter = require('./controllers/login')
 
-
 mongoose
   .connect(config.mongoUrl)
   .then( () => {

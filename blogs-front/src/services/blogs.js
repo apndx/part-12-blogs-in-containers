@@ -13,7 +13,6 @@ const getAll = () => {
 }
 
 const del = (id) => {
-  console.log('del servicen saama id', id)
   const config = {
     headers: { Authorization: token },
   }
@@ -34,7 +33,6 @@ const create = async newObject => {
 
 const update = (id, newObject) => {
   const request = axios.put(`${baseUrl}/${id}`, newObject)
-  console.log('axioksen palauttama data', request)
   return request.then(response => response.data)
 }
 

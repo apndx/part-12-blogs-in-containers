@@ -16,7 +16,7 @@
     "eject": "react-scripts eject",
     "lint": "eslint ."
   },
-  "proxy": "http://localhost:9001",
+  "proxy": "http://server:9001",
   "browserslist": [
     ">0.2%",
     "not dead",
