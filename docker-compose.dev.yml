@@ -1,0 +1,24 @@
+services:
+  app:
+    image: blogs-front-dev
+    build:
+      context: './blogs-front' # The context will pick this directory as the "build context"
+      dockerfile: dev.Dockerfile # This will simply tell which dockerfile to read
+    volumes:
+      - ./blogs-front/:/usr/src/app
+    environment:
+      - REACT_APP_BACKEND_URL=http://localhost:9001/api
+      - DANGEROUSLY_DISABLE_HOST_CHECK=true # Fixes the Invalid host header problem, use only in dev
+    container_name: blogs-front-dev # This will name the container
+  debug-helper:
+    image: busybox
+
+  nginx:
+    image: nginx:1.20.1
+    volumes:
+      - ./nginx.dev.conf:/etc/nginx/nginx.conf:ro
+    ports:
+      - 8080:80
+    container_name: reverse-proxy
+    depends_on:
+      - app # wait for the frontend container to be started
