@@ -1,5 +1,5 @@
 {
-  "name": "lh5-bloglist",
+  "name": "fs12-blogs",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -16,7 +16,7 @@
     "eject": "react-scripts eject",
     "lint": "eslint ."
   },
-  "proxy": "http://server:9001",
+  "proxy": "http://server:3000",
   "browserslist": [
     ">0.2%",
     "not dead",

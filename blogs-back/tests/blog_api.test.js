@@ -1,8 +1,8 @@
 const supertest = require('supertest')
 const { app, server } = require('../index')
 const api = supertest(app)
-const Blog = require('../models/blog')
-const User = require('../models/user')
+const Blog = require('../mongo/models/blog')
+const User = require('../mongo/models/user')
 const { initialBlogs, blogsInDb, usersInDb } = require('./test_helper')
 
 
